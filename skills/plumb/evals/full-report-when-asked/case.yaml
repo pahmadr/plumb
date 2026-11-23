@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: full-report-when-asked
+context:
+  scaffold_script: place-files.sh
+expected_outcome: |
+  A structured, self-contained report: conclusion first, then findings with file and line references, then recommendations and what was not checked. It reports that round_money truncates instead of rounding half up (and since which commit), lists every place that depends on it (cart, invoice, report, format_money), notes the double rounding in invoice_total (net rounded, then tax rounded again), and notes that no test covers fractional cents. No code is changed.

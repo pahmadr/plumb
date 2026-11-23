@@ -1,0 +1,11 @@
+{
+  "name": "plumb",
+  "owner": { "name": "Ahmadreza" },
+  "plugins": [
+    {
+      "name": "plumb",
+      "source": "./",
+      "description": "Token-lean coding mode with adaptive depth. No UI, no hooks."
+    }
+  ]
+}

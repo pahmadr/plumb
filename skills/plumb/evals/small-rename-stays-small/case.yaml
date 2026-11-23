@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: small-rename-stays-small
+context:
+  scaffold_script: place-files.sh
+expected_outcome: |
+  The parameter is renamed in shop/cart.py and in every caller that passes it by keyword (shop/invoice.py, tests/test_cart.py). Tests pass. The run does not read shop/catalog.py or the git history, and the final reply is a few lines.

@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: regression-names-the-commit
+context:
+  scaffold_script: place-files.sh
+expected_outcome: |
+  The answer names the commit "money: add format_money, tidy helpers" (about 8 days old) as the cause: it replaced ROUND_HALF_UP quantize in shop/money.py round_money with integer truncation. No file is modified. The run uses git history to establish this rather than guessing.

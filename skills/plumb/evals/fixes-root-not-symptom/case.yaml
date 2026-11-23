@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: fixes-root-not-symptom
+context:
+  scaffold_script: place-files.sh
+expected_outcome: |
+  The fix is made in shop/money.py round_money (restore half-up rounding to cents), not by patching shop/invoice.py or shop/cart.py. format_money keeps working. A test covering a half-cent case is added and the suite passes. The reply mentions that cart totals and the monthly report were affected too, or that they share the fix.

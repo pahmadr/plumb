@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: rule-change-reaches-every-copy
+context:
+  scaffold_script: place-files.sh
+expected_outcome: |
+  The user names only shop/invoice.py, but the 9% rate also lives in shop/receipt.py (hard-coded, in both the calculation and the printed label) and in README.md. A good run changes all of them, ideally by making receipt.py use the one rate constant, keeps the tests passing, and says in its reply which other places it updated.
