@@ -106,13 +106,14 @@ Measured on a real Django and Next.js codebase, single runs, details in
 
 | Task | Compared with | Tokens | Outcome |
 |------|---------------|-------:|---------|
+| Five eval cases (rename, rule change, root-cause fix, regression, report) | no skill | +5% | All core checks passed in both. plumb also fixed a second rounding bug the fix exposed, and found an expected issue the other report missed. |
 | Product question | no skill | +5% | Same advice, better backed by the code. |
 | Multi-module data-integrity investigation | ponytail | +12% | Found the same serious bug, plus a second real bug the other run missed. Both were then fixed. |
 
-Honestly: these runs do not show plumb saving tokens. They show it spending a
-little more on hard tasks, and getting more right for it. The savings it is
-built for show up on tasks with large reads and outputs. The eval suite below
-is built to measure them, and results will be added as they come in.
+Honestly: these runs do not show plumb saving tokens. It spends a little more,
+mostly the cost of loading the skill file, and gets more right for it. The
+savings it is built for (bounded output, no re-reads, line-range reads) need
+long sessions on large codebases to show, and these runs were short.
 
 ## Evals
 

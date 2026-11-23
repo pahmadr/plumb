@@ -50,17 +50,50 @@ statement ignored cheque payments, so an invoice half paid by cheque showed
 the whole amount owed. Both defects were confirmed by reading the code and then
 fixed, with tests that fail before the fix.
 
+## 2026-11-23: the five eval cases, plumb vs no skill
+
+The suite in `skills/plumb/evals/`, one run per case and configuration, each
+on a fresh copy of the fixture repository. Model: Claude Opus 5.5. Graded by
+the repository's final state, the tool calls made, and the reply.
+
+| Case | No skill | plumb | Difference |
+|------|---------:|------:|-----------:|
+| small-rename-stays-small | 58,546 | 61,349 | +4.8% |
+| rule-change-reaches-every-copy | 61,479 | 62,525 | +1.7% |
+| fixes-root-not-symptom | 61,851 | 64,338 | +4.0% |
+| regression-names-the-commit | 60,947 | 65,078 | +6.8% |
+| full-report-when-asked | 66,740 | 71,621 | +7.3% |
+| **Total** | **309,563** | **324,911** | **+5.0%** |
+
+Quality:
+
+- Both configurations passed the core checks on every case: right files
+  changed, tests passing, the right commit named, nothing changed when told
+  not to, both copies of the VAT rate updated.
+- plumb did better on two cases. On `fixes-root-not-symptom` it noticed that
+  the till receipt rounds VAT on its own and still printed the wrong total
+  after the shared helper was fixed, and fixed that too; the run without the
+  skill fixed only the helper. On `full-report-when-asked` it found the double
+  rounding in `invoice_total` (one of the expected findings) and ended with a
+  "not covered" section; the run without the skill did neither.
+- Neither run read the 800-line catalogue file on the small rename.
+
+Cost: plumb used 5% more tokens. About 2,000 of the extra tokens per run are
+the skill file itself, plus `references/deep.md` on the two cases where it
+went deep. The tasks were small enough that the baseline was already lean, so
+there was little waste for plumb to remove.
+
 ## What these runs do and do not show
 
-- They do not show plumb saving tokens. In both it spent a little more: 5% and
-  12%.
+- They do not show plumb saving tokens. On every task so far it spent a
+  little more: 2% to 12%, 5% on the eval suite as a whole.
 - They do show the trade it is designed to make: on the investigation, the
   extra 11k tokens bought a second serious bug that would otherwise have
   surfaced later, at a far higher cost.
 - The saving plumb aims for (small tasks staying small, bounded command
-  output, no re-reads) needs tasks with large outputs to show up. The eval
-  suite in `skills/plumb/evals/` is built for that and has not been run at
-  scale yet.
+  output, no re-reads) needs long sessions with large files and outputs to
+  show up. The eval fixture is small, and a fresh agent on it is already
+  lean, so these runs cannot show it either way.
 
 ## How to reproduce
 
