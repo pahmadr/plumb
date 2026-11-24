@@ -27,7 +27,7 @@ It also checks, before calling a change done, that the change reaches every
 place the feature acts: other screens, reports, clients, text that describes
 the behaviour, a second copy of the same rule.
 
-No status line, no panel, no hooks, no banner. One skill file, about 2,000
+No status line, no panel, no hooks, no banner. One skill file, about 750
 tokens, loaded only when it triggers.
 
 ## Install
@@ -106,12 +106,12 @@ Measured on a real Django and Next.js codebase, single runs, details in
 
 | Task | Compared with | Tokens | Outcome |
 |------|---------------|-------:|---------|
-| Five eval cases (rename, rule change, root-cause fix, regression, report) | no skill | +5% | All core checks passed in both. plumb also fixed a second rounding bug the fix exposed, and found an expected issue the other report missed. |
+| Five eval cases (rename, rule change, root-cause fix, regression, report) | no skill | +1.7% | All core checks passed in both. plumb also fixed a second rounding bug the fix exposed, and found an expected issue the other report missed. |
 | Product question | no skill | +5% | Same advice, better backed by the code. |
 | Multi-module data-integrity investigation | ponytail | +12% | Found the same serious bug, plus a second real bug the other run missed. Both were then fixed. |
 
 Honestly: these runs do not show plumb saving tokens. It spends a little more,
-mostly the cost of loading the skill file, and gets more right for it. The
+mostly the cost of loading the skill file (now about 750 tokens), and gets more right for it. The
 savings it is built for (bounded output, no re-reads, line-range reads) need
 long sessions on large codebases to show, and these runs were short.
 

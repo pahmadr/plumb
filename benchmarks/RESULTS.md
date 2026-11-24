@@ -83,10 +83,31 @@ the skill file itself, plus `references/deep.md` on the two cases where it
 went deep. The tasks were small enough that the baseline was already lean, so
 there was little waste for plumb to remove.
 
+## 2026-11-24: smaller skill file (v0.2.0)
+
+`SKILL.md` cut from 8.6 KB to 3.0 KB (about 2,100 to 750 tokens), the same
+rules each in one line; `references/deep.md` from 3.8 KB to 3.0 KB; the
+description from about 110 to 50 words. Same five cases, fresh fixture copies,
+one run each, compared with the no-skill runs above.
+
+| Case | No skill | plumb 0.1 | plumb 0.2 | 0.2 vs no skill |
+|------|---------:|----------:|----------:|----------------:|
+| small-rename-stays-small | 58,546 | 61,349 | 59,197 | +1.1% |
+| rule-change-reaches-every-copy | 61,479 | 62,525 | 62,346 | +1.4% |
+| fixes-root-not-symptom | 61,851 | 64,338 | 62,546 | +1.1% |
+| regression-names-the-commit | 60,947 | 65,078 | 63,264 | +3.8% |
+| full-report-when-asked | 66,740 | 71,621 | 67,456 | +1.1% |
+| **Total** | **309,563** | **324,911** | **314,809** | **+1.7%** |
+
+The extra cost fell from 5.0% to 1.7%. Quality held: the fix again caught and
+fixed the receipt's separate rounding, the report again found the double
+rounding and ended with a "not covered" section, and the VAT change again
+reached all three copies (and this time added a test for it).
+
 ## What these runs do and do not show
 
 - They do not show plumb saving tokens. On every task so far it spent a
-  little more: 2% to 12%, 5% on the eval suite as a whole.
+  little more: 1% to 12%; 1.7% on the eval suite with the smaller skill file.
 - They do show the trade it is designed to make: on the investigation, the
   extra 11k tokens bought a second serious bug that would otherwise have
   surfaced later, at a far higher cost.
